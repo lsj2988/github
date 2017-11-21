@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#define MAX_NUM 5
+#include <time.h>
+#define MAX_NUM 10
 
 struct person {
     char name[20];
@@ -14,36 +15,64 @@ struct person {
     char stime[80][30];
 };
 
-int Sign_up(struct person *pp, int n_person) {
-    if (*num < MAX_NUM) {
+int Sign_up(struct person *pp, int n) {
+    if (n < MAX_NUM) {
         
     printf("Name : ");
-    fgets(pp[n_person].name,sizeof(pp[n_person].name),stdin);
+    fgets(pp[n].name,sizeof(pp[n].name),stdin);
     printf("\n"); 
     
     printf("Id : ");
-    fgets(pp[n_person].id,sizeof(pp[n_person].id),stdin);
+    fgets(pp[n].id,sizeof(pp[n].id),stdin);
     printf("\n"); 
     
     printf("Password : ");
-    fgets(pp[n_person].psw,sizeof(pp[n_person].psw),stdin);
+    fgets(pp[n].psw,sizeof(pp[n].psw),stdin);
     printf("\n"); 
     
     printf("School : ");
-    fgets(pp[n_person].sch,sizeof(pp[n_person].sch),stdin);
+    fgets(pp[n].sch,sizeof(pp[n].sch),stdin);
     printf("\n"); 
     
     printf("City : ");
-    fgets(pp[n_person].city,sizeof(pp[n_person].city),stdin);
+    fgets(pp[n].city,sizeof(pp[n].city),stdin);
     printf("\n"); 
     
     printf("Age : ");
-    fgets(pp[n_person].age,sizeof(pp[n_person].age),stdin);
+    fgets(pp[n].age,sizeof(pp[n].age),stdin);
     printf("\n");
 
-    return (n_person + 1);
+    return (n + 1);
     }
 
     else
         printf("User is Full\n");
 }
+
+int To_write_note(struct person *lp,int n_note) {
+    char temp[200];
+    char blanc = 0;
+
+    printf("Write : ");
+    fgets((temp,sizeof(temp),stdin);
+
+    if() {
+        fgets((*lp).memo[n_note],sizeof((*lp).memo[n_note]),stdin);
+    }
+    printf("\n");
+    
+    for(j=0; j<strlen(); j++) {
+        if((*lp).memo[j] == " ") {
+            blanc++;
+            if(blanc == 4) break;
+        }
+    }
+
+    strncpy((*lp).title[n_note],(*lp).memo[n_note],j);
+}
+
+
+
+    printf("Print : %s",(*lp).memo[n_note]);
+    return (n_note + 1);
+}  
