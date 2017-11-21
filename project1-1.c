@@ -7,7 +7,7 @@ int main(void) {
     printf("-----------------\n");
     printf(" 1.To write note\n 2.To edit note\n 3.To view note\n 4.Back to Menu\n");
     printf("-----------------\n");
-
+    /*
     printf("Press : ");
     scanf("%d",&menu2);
     
@@ -23,6 +23,6 @@ int main(void) {
             break;
         default: printf("You press Wrong Number\n"); break;
     }
-
+    */
     return 0;
 }
