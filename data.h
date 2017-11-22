@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
-#define MAX_NUM 10
+#define MAX_P 10
+#define MAX_N 80
 
-struct person {
+typedef struct information {
     char name[20];
     char id[20];
     char psw[20];
@@ -13,66 +13,77 @@ struct person {
     char title[80][20];
     char memo[80][200];
     char stime[80][30];
-};
+}info;
 
-int Sign_up(struct person *pp, int n) {
-    if (n < MAX_NUM) {
+info arr[10];
+int pnum = 0;
+int tnum[10] = {0};
+
+void Sign_up(info *arr, int *pnum) {
+    if ((*pnum) < MAX_P) {
         
     printf("Name : ");
-    fgets(pp[n].name,sizeof(pp[n].name),stdin);
-    printf("\n"); 
+    fgets(arr[*pnum].name,sizeof(arr[*pnum].name),stdin);
     
     printf("Id : ");
-    fgets(pp[n].id,sizeof(pp[n].id),stdin);
-    printf("\n"); 
+    fgets(arr[*pnum].id,sizeof(arr[*pnum].id),stdin);
     
     printf("Password : ");
-    fgets(pp[n].psw,sizeof(pp[n].psw),stdin);
-    printf("\n"); 
+    fgets(arr[*pnum].psw,sizeof(arr[*pnum].psw),stdin);
     
     printf("School : ");
-    fgets(pp[n].sch,sizeof(pp[n].sch),stdin);
-    printf("\n"); 
+    fgets(arr[*pnum].sch,sizeof(arr[*pnum].sch),stdin);
     
     printf("City : ");
-    fgets(pp[n].city,sizeof(pp[n].city),stdin);
-    printf("\n"); 
+    fgets(arr[*pnum].city,sizeof(arr[*pnum].city),stdin);
     
     printf("Age : ");
-    fgets(pp[n].age,sizeof(pp[n].age),stdin);
-    printf("\n");
-
-    return (n + 1);
+    fgets(arr[*pnum].age,sizeof(arr[*pnum].age),stdin);
+    
+    (*pnum)++;
     }
 
     else
         printf("User is Full\n");
 }
 
-int To_write_note(struct person *lp,int n_note) {
+void To_write_note(info *arr, int *tnum, int *n_num) {
     char temp[200];
-    char blanc = 0;
-
+    char ch;
+    int i = 0;
+    int l = 0;
+    int flag = 0;
     printf("Write : ");
-    fgets((temp,sizeof(temp),stdin);
-
-    if() {
-        fgets((*lp).memo[n_note],sizeof((*lp).memo[n_note]),stdin);
-    }
-    printf("\n");
-    
-    for(j=0; j<strlen(); j++) {
-        if((*lp).memo[j] == " ") {
-            blanc++;
-            if(blanc == 4) break;
+    if((*n_num) < MAX_N) {
+        ch = getchar();
+        while(flag != 2) {
+            if (ch == '\n') flag++;
+            else flag = 0;
+            temp[i] = ch;
+            i++;
+            ch = getchar();
         }
+        temp[i-1] = '\0';
+        strncpy(arr[*tnum].memo[*n_num],temp,(strlen(temp)-1));
+        for(l=0; l<19; l++) {
+            if(temp[l] == 10) {
+                strncpy(arr[*tnum].title[*n_num],temp,l);
+                break;
+            }
+            else if(temp[l] == 32) {
+                strncpy(arr[*tnum].title[*n_num],temp,l); 
+                break;
+            }
+            else if(l == 18) {
+                strncpy(arr[*tnum].title[*n_num],temp,l);
+                break;
+            }
+        }
+        (*tnum)++;
     }
-
-    strncpy((*lp).title[n_note],(*lp).memo[n_note],j);
+            
+    else {
+        printf("Memo is Full\n");
+    
+    }
 }
-
-
-
-    printf("Print : %s",(*lp).memo[n_note]);
-    return (n_note + 1);
-}  
