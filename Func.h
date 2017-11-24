@@ -27,6 +27,7 @@ void Sign_up(info *arr, int *npnum) {
     
     char ch;
     char psw[20];
+    int j;
 
     printf("Name : ");
     fgets(arr[*npnum].name,sizeof(arr[*npnum].name),stdin);
@@ -37,10 +38,12 @@ void Sign_up(info *arr, int *npnum) {
     printf("Password : ");
     for(j=0; j<19; j++) {
         ch = getch();
-        putchar('*');
         if(ch == '\n') break;
+        putchar('*');
         psw[j] = ch;
     }
+    printf("\n");
+
     strncpy(arr[*npnum].psw,psw,strlen(psw));
     
     printf("School : ");
@@ -66,12 +69,13 @@ void Sign_in(info *arr, int *pnum,int *osnum) {
     char psw[20];
     char ch;
     int pn;
-    
+
     printf("----------------\n");
-    printf("ID : "); scanf("%s", id);
+    printf("ID : ");
+    fgets(id,sizeof(id),stdin);
 
     for(i = 0; i < (*pnum); i++) {
-        if(strcmp(arr[i].id,id,strlen(id)) == 0) {
+        if(strncmp(arr[i].id,id,strlen(id)) == 0) {
             break;
         }
     }
@@ -82,10 +86,12 @@ void Sign_in(info *arr, int *pnum,int *osnum) {
         printf("PASSWORD : ");
         for(j=0; j<19; j++) {
         ch = getch();
-        putchar('*');
         if(ch == '\n') break;
+        putchar('*');
         psw[j] = ch;
     }
+    printf("\n");
+
     if(strncmp(arr[pn].psw, psw, strlen(psw)) == 0) {
         (*osnum) = pn;
         printf("---------------\n"); break;
@@ -102,6 +108,7 @@ void To_write_note(info *arr, int *tnum, int *n_num) {
     int i = 0;
     int l = 0;
     int flag = 0;
+
     printf("Write : ");
     if((*n_num) < MAX_N) {
         ch = getchar();

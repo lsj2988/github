@@ -2,13 +2,13 @@
 #include <stdlib.h>
 
 void Signup() {
-    system("clear");
-    Sign_in(arr, &npnum);
+    system("clear"); 
+    Sign_up(arr, &npnum);
 }
 
 void Signin() {
     system("clear");
-    Sign_up(arr, &pnum, &osnum);
+    Sign_in(arr, &pnum, &osnum);
 }
 
 void Towritenote() {
