@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "Info.h"
-#include "Func.h"
+#include "Func1.h"
 #include "ArrFunc.h"
 
 int main(void) {
