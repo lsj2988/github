@@ -4,6 +4,32 @@
 #define MAX_P 10
 #define MAX_N 80
 
+void Loaddata1(info *arr, int *pnum) {
+    int i;
+    FILE *file = fopen("a.txt","rt");
+    if (file == NULL) {
+        return;
+    }
+    while(1) {
+        fscanf(file,"%s %s %s %s %s %s",arr[i].name,arr[i].id,arr[i].psw,arr[i].sch,arr[i].city,arr[i].age);
+        if (feof(file) != 0) {
+            break;
+            (*pnum)++;
+        }
+    }
+}
+
+void Savedata1(info *arr,int *pnum) {
+    int i;
+    FILE *file = fopen("a.txt","wt");
+    if (file == NULL) {
+        return;
+    }
+    for(i=0;i<(*pnum)+1;i++) {
+         fprintf(file,"%s %s %s %s %s %s",arr[i].name,arr[i].id,arr[i].psw,arr[i].sch,arr[i].city,arr[i].age);
+    }
+}
+
 int getch() {
     int ch;
     struct termios buf;
@@ -22,7 +48,7 @@ int getch() {
     return ch;
 }
 
-void Sign_up(info *arr, int *npnum) {
+void Sign_up(info *arr, int *npnum, int *pnum) {
     if ((*npnum) < MAX_P) {
     
     char ch;
@@ -56,6 +82,7 @@ void Sign_up(info *arr, int *npnum) {
     fgets(arr[*npnum].age,sizeof(arr[*npnum].age),stdin);
     
     (*npnum)++;
+    (*pnum) = (*npnum) - 1;
     }
 
     else {
@@ -145,7 +172,7 @@ void To_write_note(info *arr, int *tnum, int *n_num) {
 
 void List_of_user(info *arr, int *pnum) {
     int i;
-    for(i=0;i<(*pnum);i++) {
+    for(i=0;i<(*pnum)+1;i++) {
         printf("\n-------------------------\n");
         printf("Name : %s\n",arr[i].name);
         printf("ID : %s\n",arr[i].id);

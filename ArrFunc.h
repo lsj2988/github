@@ -3,7 +3,7 @@
 
 void Signup() {
     system("clear"); 
-    Sign_up(arr, &npnum);
+    Sign_up(arr, &npnum, &pnum);
 }
 
 void Signin() {
