@@ -29,7 +29,7 @@ void Savedata1(info *arr,int *pnum) {
     if (file == NULL) {
         return;
     }
-    for(i=0;i<(*pnum)+1;i++) {
+    for(i=0;i<(*pnum);i++) {
         fwrite(arr[i].name,sizeof(arr[i].name),1,file);
         fwrite(arr[i].id,sizeof(arr[i].id),1,file);
         fwrite(arr[i].psw,sizeof(arr[i].psw),1,file);
@@ -58,17 +58,17 @@ int getch() {
 }
 
 void Sign_up(info *arr, int *npnum, int *pnum) {
-    if ((*npnum) < MAX_P) {
+    if ((*pnum) < MAX_P) {
     
     char ch;
     char psw[20];
     int j;
 
     printf("Name : ");
-    fgets(arr[*npnum].name,sizeof(arr[*npnum].name),stdin);
+    fgets(arr[*pnum].name,sizeof(arr[*pnum].name),stdin);
     
     printf("Id : ");
-    fgets(arr[*npnum].id,sizeof(arr[*npnum].id),stdin);
+    fgets(arr[*pnum].id,sizeof(arr[*pnum].id),stdin);
     
     printf("Password : ");
     for(j=0; j<19; j++) {
@@ -79,19 +79,18 @@ void Sign_up(info *arr, int *npnum, int *pnum) {
     }
     printf("\n");
 
-    strncpy(arr[*npnum].psw,psw,strlen(psw));
+    strncpy(arr[*pnum].psw,psw,strlen(psw));
     
     printf("School : ");
-    fgets(arr[*npnum].sch,sizeof(arr[*npnum].sch),stdin);
+    fgets(arr[*pnum].sch,sizeof(arr[*pnum].sch),stdin);
     
     printf("City : ");
-    fgets(arr[*npnum].city,sizeof(arr[*npnum].city),stdin);
+    fgets(arr[*pnum].city,sizeof(arr[*pnum].city),stdin);
     
     printf("Age : ");
-    fgets(arr[*npnum].age,sizeof(arr[*npnum].age),stdin);
-    
-    (*npnum)++;
-    (*pnum) = (*npnum) - 1;
+    fgets(arr[*pnum].age,sizeof(arr[*pnum].age),stdin);
+
+    (*pnum)++;
     }
 
     else {
@@ -181,7 +180,7 @@ void To_write_note(info *arr, int *tnum, int *n_num) {
 
 void List_of_user(info *arr, int *pnum) {
     int i;
-    for(i=0;i<(*pnum)+1;i++) {
+    for(i=0;i<(*pnum);i++) {
         printf("\n-------------------------\n");
         printf("Name : %s\n",arr[i].name);
         printf("ID : %s\n",arr[i].id);

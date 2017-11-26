@@ -12,11 +12,10 @@ typedef struct information {
     char age[4];
     char title[80][20];
     char memo[80][200];
-    char stime[80][30];
+    int stime[80][6];
 }info;
 
 info arr[10];
-int npnum = 0; // For New User Number
-int pnum = 0; // Now User Number
+int pnum = 0; // User Number
 int osnum = 0; // Occupied User
 int tnum[10] = {0,}; // Memo Number fo Each User 
