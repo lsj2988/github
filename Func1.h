@@ -57,7 +57,7 @@ int getch() {
     return ch;
 }
 
-void Sign_up(info *arr, int *npnum, int *pnum) {
+void Sign_up(info *arr, int *pnum) {
     if ((*pnum) < MAX_P) {
     
     char ch;
@@ -147,7 +147,7 @@ void To_write_note(info *arr, int *tnum, int *n_num) {
     printf("Write : ");
     if((*n_num) < MAX_N) {
         ch = getchar();
-        while(flag != 2) {
+
             if (ch == '\n') flag++;
             else flag = 0;
             temp[i] = ch;

@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <fcntl.h>
+#include <unistd.h>
 #define MAX_P 10
 #define MAX_N 80
 
@@ -16,8 +18,11 @@ typedef struct information {
 }info;
 
 info arr[10];
+int pnum = 0; // This New User count
+int pnum1 = 0; // This Old User count
+int t_num[10] = {0}; // This Memo number
 
-void Sign_up(info *arr, int *pnum1) {
+void Sign_up(info *arr, int *pnum) {
     if ((*pnum) < MAX_P) {
         
     printf("Name : ");
@@ -37,16 +42,15 @@ void Sign_up(info *arr, int *pnum1) {
     
     printf("Age : ");
     fgets(arr[*pnum].age,sizeof(arr[*pnum].age),stdin);
-    
 
-    (*pnum1)++;
+    (*pnum)++;
     }
 
     else
         printf("User is Full\n");
 }
 
-void To_write_note(info *arr, int *pnum2, int *n_num) {
+void To_write_note(info *arr, int *tnum, int *n_num) {
     char temp[200];
     char ch;
     int i = 0;
@@ -63,22 +67,22 @@ void To_write_note(info *arr, int *pnum2, int *n_num) {
             ch = getchar();
         }
         temp[i-1] = '\0';
-        strncpy(arr[*pnum].memo[*n_num],temp,(strlen(temp)-1));
+        strncpy(arr[*tnum].memo[*n_num],temp,(strlen(temp)-1));
         for(l=0; l<19; l++) {
             if(temp[l] == 10) {
-                strncpy(arr[*pnum].title[*n_num],temp,l);
+                strncpy(arr[*tnum].title[*n_num],temp,l);
                 break;
             }
             else if(temp[l] == 32) {
-                strncpy(arr[*pnum].title[*n_num],temp,l); 
+                strncpy(arr[*tnum].title[*n_num],temp,l); 
                 break;
             }
             else if(l == 18) {
-                strncpy(arr[*pnum].title[*n_num],temp,l);
+                strncpy(arr[*tnum].title[*n_num],temp,l);
                 break;
             }
         }
-        (*pnum2)++;
+        (*n_num)++;
     }
             
     else {
@@ -86,3 +90,25 @@ void To_write_note(info *arr, int *pnum2, int *n_num) {
     
     }
 }
+
+void Store1(info *arr, int rnum1) {
+    FILE *file1 = fopen("a.txt","wt");
+    fprintf(file1,"%s %s %s %s %s %s",arr[rnum1].name,arr[rnum1].id,arr[rnum1].psw,arr[rnum1].sch,arr[rnum1].city,arr[rnum1].age);
+}
+
+void Store2(info *arr, int tnum, int n_num) {
+    FILE *file2 = fopen("b.txt","wb");
+    fprintf(file2,"%s %s",arr[tnum].title[n_num],arr[tnum].memo[n_num]);
+}
+
+void Signup() {
+    Sign_up(arr,&pnum);
+    Store1(arr,pnum1);
+}
+
+void Towritenote() {
+    To_write_note(arr,&pnum1,&t_num[pnum1]);
+    Store2(arr,pnum1,t_num[pnum1]);
+}
+
+

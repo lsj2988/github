@@ -17,7 +17,8 @@ typedef struct information {
 
 info arr[10];
 int pnum = 0;
-int tnum[10] = {0};
+int pnum1 = 0;
+int tnum[10] = {0,};
 
 void Sign_up(info *arr, int *pnum) {
     if ((*pnum) < MAX_P) {
@@ -83,7 +84,6 @@ void To_write_note(info *arr, int *tnum, int *n_num) {
     }
             
     else {
-        printf("Memo is Full\n");
-    
+        printf("Memo is Full\n"); 
     }
 }

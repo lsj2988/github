@@ -1,15 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "data1.h"
-int pnum1 = 0;
-int pnum2 = 0;
-int pnum3 = 0;
+#include "tmpdata.h"
+
 int  main(void) {
     int i = 0;
     int j = 0;
-    Sign_up(arr, &pnum1);
-
+    Signup();
+    system("clear");
     printf("---------------------------\n");
     system("clear");
     printf("Name : %s\n",arr[i].name);
@@ -18,7 +16,7 @@ int  main(void) {
     printf("City : %s\n",arr[i].city);
     printf("Age : %s\n",arr[i].age);
     
-    To_write_note(arr,&pnum2,&pnum3);
+    Towritenote();
     printf("Title : %s\n",arr[i].title[j]);
     printf("Memo : %s\n",arr[i].memo[j]);
 

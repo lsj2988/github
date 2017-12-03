@@ -5,17 +5,16 @@
 #define MAX_N 80
 
 void Loaddata1(info *arr, int *pnum) {
-    int i;
     FILE *file = fopen("a.txt","rt");
     if (file == NULL) {
         return;
     }
     while(1) {
-        fscanf(file,"%s %s %s %s %s %s",arr[i].name,arr[i].id,arr[i].psw,arr[i].sch,arr[i].city,arr[i].age);
+        fscanf(file,"%s %s %s %s %s %s ",arr[*pnum].name,arr[*pnum].id,arr[*pnum].psw,arr[*pnum].sch,arr[*pnum].city,arr[*pnum].age);
         if (feof(file) != 0) {
             break;
-            (*pnum)++;
         }
+            (*pnum)++;
     }
 }
 
