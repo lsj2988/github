@@ -1,3 +1,6 @@
+#ifndef _INFO_H_
+#define _INFO_H_
+
 #include <stdio.h>
 #include <string.h>
 #define MAX_P 10
@@ -19,3 +22,5 @@ info arr[10];
 int pnum = 0; // User Number
 int osnum = 0; // Occupied User
 int tnum[10] = {0,}; // Memo Number fo Each User 
+
+#endif

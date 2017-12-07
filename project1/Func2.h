@@ -3,10 +3,18 @@
 #include<termios.h>
 #include<time.h>
 
+void Loadtext (int *tnum) {
+    int i;
+    FILE *file = fopen("d.txt","rb");
+    if(file == NULL) {
+        return;
+    }
+    fread(tnum,sizeof(tnum),10,file);
+}
 
 void Loadtext1(info *arr, int *pnum, int *tnum)
 {
-    int i,j,k;
+    int i,j;
 
     FILE *file = fopen("memo.txt", "rb");
 
@@ -14,27 +22,27 @@ void Loadtext1(info *arr, int *pnum, int *tnum)
     {
         return;
     }
-    for(i=0;i<10;i++) {
-        fread(&tnum[i],sizeof(tnum[i]), 1, file);
-    }
-
     for(j=0;j<(*pnum);j++) {
-        for(k=0;k<tnum[j];k++) {
-        fread(arr[j].title[tnum[k]], sizeof(arr[j].title[tnum[k]]), 1, file);
-        fread(arr[j].memo[tnum[k]], sizeof(arr[j].memo[tnum[k]]), 1, file); 
-        fread(arr[j].stime[tnum[k]], sizeof(arr[j].stime[tnum[k]]), 1, file);  
-        }
-        if(feof(file) != 0)
-        {
-            break;
-        }
+        fread(arr[j].title, sizeof(arr[j].title), tnum[j], file);
+        fread(arr[j].memo, sizeof(arr[j].memo), tnum[j], file);
+        fread(arr[j].stime, sizeof(arr[j].stime), tnum[j], file);
     }
 }
 
-void Savetext1(info *arr, int *pnum ,int *tnum)
+void Savetext (int *tnum) {
+    int i;
+    FILE *file = fopen("d.txt","wb");
+    if(file == NULL) {
+        return;
+    }
+    fwrite(tnum,sizeof(tnum),10,file);
+    fclose(file);
+}
+
+void Savetext1(info *arr, int *pnum, int *tnum)
 {
 
-    int i,j,k;
+    int i,j;
     FILE *file = fopen("memo.txt", "wb");
 
     if(file == NULL)
@@ -42,17 +50,12 @@ void Savetext1(info *arr, int *pnum ,int *tnum)
         return;
     }
 
-    for(i = 0;i < 10; i++)
-    {
-        fwrite(&tnum[i], sizeof(tnum[i]), 1, file);
-    }
     for(j=0;j<(*pnum);j++) {
-        for(k=0;k<tnum[j];k++) {
-            fwrite(arr[j].title[tnum[k]], sizeof(arr[j].title[tnum[k]]), 1, file);
-            fwrite(arr[j].memo[tnum[k]], sizeof(arr[j].memo[tnum[k]]), 1, file);
-            fwrite(arr[j].stime[tnum[k]], sizeof(arr[j].stime[tnum[k]]), 1, file);
-        }
+        fwrite(arr[j].title, sizeof(arr[j].title), tnum[j], file);
+        fwrite(arr[j].memo, sizeof(arr[j].memo), tnum[j], file);
+        fwrite(arr[j].stime, sizeof(arr[j].stime), tnum[j], file);
     }
+    fclose(file);
 }
 
 void savetime(info *arr, int *osnum, int *tnum)
@@ -151,6 +154,7 @@ void to_view_note(info *arr, int *tnum, int *osnum, int *pnum)
 
     for(i = 0;i < *pnum;i++)
     {
+        if(tnum[i] > 0) {
         printf("------------------------------------\n");
         for(j = 0;j < tnum[*osnum];j++)
         {
@@ -161,6 +165,7 @@ void to_view_note(info *arr, int *tnum, int *osnum, int *pnum)
             printf("Memo : %s", arr[i].memo[j]);
         }
         printf("------------------------------------\n");
+    }
     }
 
 }

@@ -12,6 +12,7 @@
 int main()
 {
     Loaddata1(arr, &pnum);
+    Loadtext(tnum);
     Loadtext1(arr, &pnum ,tnum);
     char menu;
     char menu2;
@@ -67,6 +68,7 @@ int main()
                 break;
             case '4' : 
                 Savedata1(arr, &pnum); 
+                Savetext(tnum);
                 Savetext1(arr, &pnum ,tnum);
                 printf("\n"); 
                 menu = 'Q';

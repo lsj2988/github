@@ -35,6 +35,7 @@ void Savedata1(info *arr,int *pnum) {
         fwrite(arr[i].city,sizeof(arr[i].city),1,file);
         fwrite(arr[i].age,sizeof(arr[i].age),1,file);
     }
+    fclose(file);
 }
 
 int getch() {
@@ -65,10 +66,13 @@ void Sign_up(info *arr , int *pnum) {
 
     printf("Name : ");
     fgets(arr[*pnum].name,sizeof(arr[*pnum].name),stdin);
-    
+    arr[*pnum].name[strlen(arr[*pnum].name)-1] = '\0';
+
     printf("Id : ");
     fgets(arr[*pnum].id,sizeof(arr[*pnum].id),stdin);
-    
+    arr[*pnum].id[strlen(arr[*pnum].id)-1] = '\0';
+
+
     printf("Password : ");
     for(j=0; j<19; j++) {
         ch = getch();
@@ -82,13 +86,18 @@ void Sign_up(info *arr , int *pnum) {
     
     printf("School : ");
     fgets(arr[*pnum].sch,sizeof(arr[*pnum].sch),stdin);
-    
+    arr[*pnum].sch[strlen(arr[*pnum].sch)-1] = '\0';
+
+
     printf("City : ");
     fgets(arr[*pnum].city,sizeof(arr[*pnum].city),stdin);
-    
+    arr[*pnum].city[strlen(arr[*pnum].city)-1] = '\0';
+
+
     printf("Age : ");
     fgets(arr[*pnum].age,sizeof(arr[*pnum].age),stdin);
-    
+    arr[*pnum].age[strlen(arr[*pnum].age)-1] = '\0';
+
     (*pnum)++;
     }
 
@@ -110,7 +119,7 @@ void Sign_in(info *arr, int *pnum,int *osnum) {
     fgets(id,sizeof(id),stdin);
 
     for(i = 0; i < (*pnum); i++) {
-        if(strncmp(arr[i].id,id,strlen(id)) == 0) {
+        if(strncmp(arr[i].id,id,strlen(id)-1) == 0) {
             break;
         }
     }
@@ -127,7 +136,7 @@ void Sign_in(info *arr, int *pnum,int *osnum) {
     }
     printf("\n");
 
-    if(strncmp(arr[pn].psw, psw, strlen(psw)) == 0) {
+    if(strncmp(arr[pn].psw, psw, strlen(psw)-1) == 0) {
         (*osnum) = pn;
         printf("---------------\n"); break;
         }
