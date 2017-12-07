@@ -10,6 +10,7 @@ void Loadtext (int *tnum) {
         return;
     }
     fread(tnum,sizeof(tnum),10,file);
+    fclose(file);
 }
 
 void Loadtext1(info *arr, int *pnum, int *tnum)
@@ -27,6 +28,7 @@ void Loadtext1(info *arr, int *pnum, int *tnum)
         fread(arr[j].memo, sizeof(arr[j].memo), tnum[j], file);
         fread(arr[j].stime, sizeof(arr[j].stime), tnum[j], file);
     }
+    fclose(file);
 }
 
 void Savetext (int *tnum) {
