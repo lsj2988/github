@@ -4,7 +4,7 @@
 #include "info.h"
 #include "Func1.h"
 #include "Func2.h"
-#include "ArrFunc.h"
+#include "ArrFunc1.h"
 #include "ArrFunc2.h"
 
 
@@ -14,6 +14,7 @@ int main()
     Loaddata1(arr, &pnum);
     Loadtext(tnum);
     Loadtext1(arr, &pnum ,tnum);
+    system("clear");
     char menu;
     char menu2;
 
@@ -33,6 +34,7 @@ int main()
                 break;
             case '2' : 
                 Signin(); 
+                system("clear");
                 while(menu2 != 'Q')
                 {
                     printf("-----------------\n");
@@ -51,6 +53,7 @@ int main()
                         break;
             
                         case '3' : 
+                        system("clear");
                         menu2 = 'Q';
                         break;
                         

@@ -1,3 +1,5 @@
+#ifndef _ARRFUNC2_H_
+#define _ARRFUNC2_H_
 #include<stdio.h>
 #include<stdlib.h>
 
@@ -14,4 +16,4 @@ void Toview()
     system("clear");
     to_view_note(arr, tnum, &osnum, &pnum);
 }
-
+#endif

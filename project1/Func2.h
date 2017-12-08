@@ -1,7 +1,9 @@
-#include<stdio.h>
-#include<string.h>
-#include<termios.h>
-#include<time.h>
+#ifndef _FUNC2_H_
+#define _FUNC2_H_
+#include <stdio.h>
+#include <string.h>
+#include <termios.h>
+#include <time.h>
 
 void Loadtext (int *tnum) {
     int i;
@@ -106,7 +108,7 @@ void to_write_note(info *arr, int *n_num, int *osnum, int *pnum)
     int flag = 0;
 
         
-    printf("//////////////////////////////////\n ");
+    printf("//////////////////////////////////\n");
     
     while(1)
     {
@@ -140,12 +142,19 @@ void to_write_note(info *arr, int *n_num, int *osnum, int *pnum)
         if(tmp[j] == 32)
         {
             flag++;
-            if(flag == 3)
-            {
-                strncpy(arr[*osnum].title[tnum[*osnum]], tmp, j);
+        }
+        
+        else if(tmp[j] == '\n') 
+        {
+            flag++;
+            tmp[j] = ' ';
+        }
+        
+        if(flag == 3)
+        {
+            strncpy(arr[*osnum].title[tnum[*osnum]], tmp, j);
             }
         }
-    }
     (tnum[*osnum])++;
 }
 
@@ -161,7 +170,7 @@ void to_view_note(info *arr, int *tnum, int *osnum, int *pnum)
         for(j = 0;j < tnum[*osnum];j++)
         {
             printf("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \n");
-            printf("Title : %s", arr[i].title[j]);
+            printf("Title : %s\n", arr[i].title[j]);
             printf("%4d.%d.%d  %d:%d:%d\n", arr[i].stime[j][0], arr[i].stime[j][1], arr[i].stime[j][2], arr[i].stime[j][3], arr[i].stime[j][4], arr[i].stime[j][5]);
             printf("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ \n");
             printf("Memo : %s", arr[i].memo[j]);
@@ -171,4 +180,4 @@ void to_view_note(info *arr, int *tnum, int *osnum, int *pnum)
     }
 
 }
-        
+#endif

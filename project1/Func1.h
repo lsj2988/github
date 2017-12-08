@@ -1,3 +1,5 @@
+#ifndef _FUNC1_H_
+#define _FUNC1_H_
 #include <stdio.h>
 #include <string.h>
 #include <termios.h>
@@ -113,35 +115,39 @@ void Sign_in(info *arr, int *pnum,int *osnum) {
     char psw[20];
     char ch;
     int pn;
-
+    int flag;
     printf("----------------\n");
-    printf("ID : ");
-    fgets(id,sizeof(id),stdin);
-
-    for(i = 0; i < (*pnum); i++) {
-        if(strncmp(arr[i].id,id,strlen(id)-1) == 0) {
-            break;
+    while(flag != 2) {
+        flag = 0;
+        printf("ID : ");
+        fgets(id,sizeof(id),stdin);
+        
+        for(i = 0; i < (*pnum); i++) {
+            if(strncmp(arr[i].id,id,strlen(id)-1) == 0) {
+                pn = i;
+                break;
+            }
         }
-    }
+        if(strncmp(arr[pn].id,id,strlen(id)-1) == 0) {
+            flag++;
+        }
 
-    pn = i;
-    
-    while(1) {
         printf("PASSWORD : ");
         for(j=0; j<19; j++) {
         ch = getch();
         if(ch == '\n') break;
         putchar('*');
         psw[j] = ch;
-    }
-    printf("\n");
-
-    if(strncmp(arr[pn].psw, psw, strlen(psw)-1) == 0) {
-        (*osnum) = pn;
-        printf("---------------\n"); break;
         }
-    else {
-        printf("Acess Denied\n"); break;
+        printf("\n");
+
+    if(strncmp(arr[pn].psw, psw, strlen(psw)) == 0) {
+        (*osnum) = pn;
+        flag++;
+        }
+    if(flag != 2) { 
+        system("clear");
+        printf("Access Denied\n");
     }
     }
 }
@@ -157,3 +163,4 @@ void List_of_user(info *arr, int *pnum) {
         printf("City : %s\n",arr[i].city);
     }
 }
+#endif
