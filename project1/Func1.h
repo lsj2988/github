@@ -60,6 +60,8 @@ int getch() {
 }
 
 void Sign_up(info *arr , int *pnum) {
+    int i;
+    int t = 0; // t is id duplication
     if ((*pnum) < MAX_P) {
     
     char ch;
@@ -69,11 +71,22 @@ void Sign_up(info *arr , int *pnum) {
     printf("Name : ");
     fgets(arr[*pnum].name,sizeof(arr[*pnum].name),stdin);
     arr[*pnum].name[strlen(arr[*pnum].name)-1] = '\0';
-
-    printf("Id : ");
-    fgets(arr[*pnum].id,sizeof(arr[*pnum].id),stdin);
-    arr[*pnum].id[strlen(arr[*pnum].id)-1] = '\0';
-
+    
+    if((*pnum) > 0) {
+        while(1) {
+            printf("Id : ");
+            fgets(arr[*pnum].id,sizeof(arr[*pnum].id),stdin);
+            arr[*pnum].id[strlen(arr[*pnum].id)-1] = '\0';
+            for(i=0;i<(*pnum);i++) {
+                if(strncmp(arr[i].id,arr[*pnum].id,strlen(arr[*pnum].id)) != 0) 
+                    t++;
+            }
+            if(t == (*pnum)) 
+                break;
+            else
+                printf("The id is already exists\n");
+        }
+    }
 
     printf("Password : ");
     for(j=0; j<19; j++) {
