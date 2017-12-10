@@ -61,7 +61,7 @@ int getch() {
 
 void Sign_up(info *arr , int *pnum) {
     int i;
-    int t = 0; // t is id duplication
+    int t; // t is id duplication
     if ((*pnum) < MAX_P) {
     
     char ch;
@@ -74,6 +74,7 @@ void Sign_up(info *arr , int *pnum) {
     
     if((*pnum) > 0) {
         while(1) {
+            t = 0;
             printf("Id : ");
             fgets(arr[*pnum].id,sizeof(arr[*pnum].id),stdin);
             arr[*pnum].id[strlen(arr[*pnum].id)-1] = '\0';
