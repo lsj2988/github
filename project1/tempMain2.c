@@ -4,17 +4,17 @@
 #include "info.h"
 #include "Func1.h"
 #include "Func2.h"
-#include "ArrFunc1.h"
+#include "ArrFunc.h"
 #include "ArrFunc2.h"
 
 
 
 int main()
 {
+    system("clear");
     Loaddata1(arr, &pnum);
     Loadtext(tnum);
     Loadtext1(arr, &pnum ,tnum);
-    system("clear");
     char menu;
     char menu2;
 
@@ -26,7 +26,6 @@ int main()
         printf("---------------------\n\n");
         printf("SELECT : ");
         menu = getch();
-
         switch(menu)
         {
             case '1' : 
@@ -38,10 +37,11 @@ int main()
                 while(menu2 != 'Q')
                 {
                     printf("-----------------\n");
-                    printf("\n 1. To Wrtite Note\n 2. To View Note\n 3. Back to menu\n\n");
+                    printf("\n 1. To Write Note\n 2. To View Note\n 3. Back to menu\n\n");
                     printf("-----------------\n");
                     printf("SELECT : ");
                     menu2 = getch();
+                    system("clear");
                     switch(menu2)
                     {
                         case '1' : 
@@ -53,7 +53,6 @@ int main()
                         break;
             
                         case '3' : 
-                        system("clear");
                         menu2 = 'Q';
                         break;
                         
@@ -70,7 +69,7 @@ int main()
                 Listofuser(); 
                 break;
             case '4' : 
-                Savedata1(arr, &pnum); 
+                Savedata1(arr, &pnum);
                 Savetext(tnum);
                 Savetext1(arr, &pnum ,tnum);
                 printf("\n"); 

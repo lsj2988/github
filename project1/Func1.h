@@ -2,34 +2,49 @@
 #define _FUNC1_H_
 #include <stdio.h>
 #include <string.h>
-#include <termios.h>
+#include <unistd.h>
 
-void Loaddata1(info *arr, int *pnum) {
-    FILE *file = fopen("a.txt","rb");
-    if (file == NULL) {
+void Loaddata1(info *arr, int *pnum) 
+{
+    FILE *file = fopen("a.txt", "rb");
+
+    if(file == NULL)
+    {
         return;
     }
-    while(1) {
+    
+    while(1) 
+    {
         fread(arr[*pnum].name,sizeof(arr[*pnum].name),1,file);
         fread(arr[*pnum].id,sizeof(arr[*pnum].id),1,file);
         fread(arr[*pnum].psw,sizeof(arr[*pnum].psw),1,file);
         fread(arr[*pnum].sch,sizeof(arr[*pnum].sch),1,file);
         fread(arr[*pnum].city,sizeof(arr[*pnum].city),1,file);
         fread(arr[*pnum].age,sizeof(arr[*pnum].age),1,file);
-        if (feof(file) != 0) {
+        
+        if (feof(file) != 0) 
+        {
             break;
         }
-            (*pnum)++;
+            
+        (*pnum)++;
     }
+
+    fclose(file);
 }
 
-void Savedata1(info *arr,int *pnum) {
+void Savedata1(info *arr, int *pnum)
+{
     int i;
     FILE *file = fopen("a.txt","wb");
-    if (file == NULL) {
+
+    if(file == NULL)
+    {
         return;
     }
-    for(i=0;i<(*pnum);i++) {
+
+    for(i=0;i<(*pnum);i++) 
+    {
         fwrite(arr[i].name,sizeof(arr[i].name),1,file);
         fwrite(arr[i].id,sizeof(arr[i].id),1,file);
         fwrite(arr[i].psw,sizeof(arr[i].psw),1,file);
@@ -37,66 +52,71 @@ void Savedata1(info *arr,int *pnum) {
         fwrite(arr[i].city,sizeof(arr[i].city),1,file);
         fwrite(arr[i].age,sizeof(arr[i].age),1,file);
     }
+
     fclose(file);
 }
 
-int getch() {
+char getch(void)
+{
+    char ch;
+    char str[10];
+
+    fgets(str,3,stdin);
+    str[strlen(str) -1] = '\0';
+    fflush(stdin);
+    ch = str[0];
     
-    int ch;
-    struct termios buf;
-    struct termios save;
-
-    tcgetattr(0, &save);
-    buf = save;
-
-    buf.c_lflag &= ~(ICANON|ECHO);
-    buf.c_cc[VMIN] = 1;
-    buf.c_cc[VTIME] = 0;
-
-    tcsetattr(0, TCSAFLUSH, &buf);
-    ch = getchar();
-    tcsetattr(0, TCSAFLUSH, &save);
     return ch;
 }
 
-void Sign_up(info *arr , int *pnum) {
-    int i;
-    int t; // t is id duplication
+void Sign_up(info *arr , int *pnum) 
+{
     if ((*pnum) < MAX_P) {
     
     char ch;
-    char psw[20];
+    char id[20];
+    char *psw;
     int j;
+    int t;
+    int flag = 0;
 
     printf("Name : ");
     fgets(arr[*pnum].name,sizeof(arr[*pnum].name),stdin);
     arr[*pnum].name[strlen(arr[*pnum].name)-1] = '\0';
     
-    if((*pnum) > 0) {
-        while(1) {
+    if((*pnum) > 0)
+    {
+        while(1)
+        {
             t = 0;
             printf("Id : ");
             fgets(arr[*pnum].id,sizeof(arr[*pnum].id),stdin);
-            arr[*pnum].id[strlen(arr[*pnum].id)-1] = '\0';
-            for(i=0;i<(*pnum);i++) {
-                if(strncmp(arr[i].id,arr[*pnum].id,strlen(arr[*pnum].id)) != 0) 
+            arr[*pnum].id[strlen(arr[*pnum].id) - 1] = '\0';
+            for(j = 0;j < *pnum;j++)
+            {
+                if(strncmp(arr[j].id, arr[*pnum].id, strlen(arr[*pnum].id)) != 0)
+                {
                     t++;
+                }
             }
-            if(t == (*pnum)) 
+            if(t ==(*pnum))
                 break;
             else
-                printf("The id is already exists\n");
+                printf("#The ID is already exist\n");
+
         }
     }
-
-    printf("Password : ");
-    for(j=0; j<19; j++) {
-        ch = getch();
-        if(ch == '\n') break;
-        putchar('*');
-        psw[j] = ch;
+    else if((*pnum) == 0)
+    {
+        printf("Id : ");
+        fgets(arr[*pnum].id,sizeof(arr[*pnum].id),stdin);
+        arr[*pnum].id[strlen(arr[*pnum].id) - 1] = '\0';
     }
-    printf("\n");
+
+    
+
+
+    psw = getpass("Password : ");
 
     strncpy(arr[*pnum].psw,psw,strlen(psw));
     
@@ -117,58 +137,63 @@ void Sign_up(info *arr , int *pnum) {
     (*pnum)++;
     }
 
-    else {
+    else 
+    {
         printf("User is Full\n");
     }
 }
 
-void Sign_in(info *arr, int *pnum,int *osnum) {
+void Sign_in(info *arr, int *pnum,int *osnum) 
+{
     
     int i,j;
     char id[20];
-    char psw[20];
+    char *psw;
     char ch;
     int pn;
     int flag;
+
     printf("----------------\n");
-    while(flag != 2) {
+    while(flag != 2)
+    {
         flag = 0;
         printf("ID : ");
         fgets(id,sizeof(id),stdin);
-        
-        for(i = 0; i < (*pnum); i++) {
-            if(strncmp(arr[i].id,id,strlen(id)-1) == 0) {
+        id[strlen(id) -1] = '\0';
+        for(i = 0; i < (*pnum); i++) 
+        {
+            if(strncmp(arr[i].id,id,strlen(id)) == 0) 
+            {
                 pn = i;
+                flag++;
                 break;
             }
         }
-        if(strncmp(arr[pn].id,id,strlen(id)-1) == 0) {
+        
+        psw = getpass("PASSWORD : ");
+
+        if(strncmp(arr[pn].psw, psw, strlen(psw)) == 0) 
+        {
+            (*osnum) = pn;
             flag++;
+            printf("---------------\n");
         }
-
-        printf("PASSWORD : ");
-        for(j=0; j<19; j++) {
-        ch = getch();
-        if(ch == '\n') break;
-        putchar('*');
-        psw[j] = ch;
+        else
+        {
+            system("clear");
+            printf("Acess Denied\n");
+            
         }
-        printf("\n");
-
-    if(strncmp(arr[pn].psw, psw, strlen(psw)) == 0) {
-        (*osnum) = pn;
-        flag++;
-        }
-    if(flag != 2) { 
-        system("clear");
-        printf("Access Denied\n");
-    }
     }
 }
 
-void List_of_user(info *arr, int *pnum) {
+void List_of_user(info *arr, int *pnum) 
+{
+    
     int i;
-    for(i=0;i<(*pnum);i++) {
+    
+    for(i=0;i<(*pnum);i++) 
+    {
         printf("\n-------------------------\n");
         printf("Name : %s\n",arr[i].name);
         printf("ID : %s\n",arr[i].id);

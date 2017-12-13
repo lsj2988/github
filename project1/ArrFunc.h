@@ -1,5 +1,3 @@
-#ifndef _ARRFUNC1_H_
-#define _ARRFUNC1_H_
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -17,4 +15,4 @@ void Listofuser() {
     system("clear");
     List_of_user(arr, &pnum);
 }
-#endif
+
