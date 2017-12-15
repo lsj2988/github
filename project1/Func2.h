@@ -2,7 +2,6 @@
 #define _FUNC2_H_
 #include<stdio.h>
 #include<string.h>
-#include<termios.h>
 #include<time.h>
 
 void Loadtext(int *tnum) 
