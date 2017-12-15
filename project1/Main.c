@@ -4,7 +4,7 @@
 #include "info.h"
 #include "Func1.h"
 #include "Func2.h"
-#include "ArrFunc.h"
+#include "ArrFunc1.h"
 #include "ArrFunc2.h"
 
 
