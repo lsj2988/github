@@ -6,7 +6,7 @@ void Towritenote()
     system("clear");
     presenttime();
     savetime(arr, &osnum, tnum);
-    to_write_note(arr, &tnum[osnum], &osnum, &pnum);
+    to_write_note(arr, tnum, &osnum);
 }
 
 void Toview()
