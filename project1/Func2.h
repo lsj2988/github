@@ -165,7 +165,7 @@ void to_write_note(info *arr, int *tnum, int *osnum)
     (tnum[*osnum])++;
 }
 
-void to_view_note(info *arr, int *tnum, int *osnum, int *pnum)
+void to_view_note(info *arr, int *tnum, int *pnum)
 {   
 
     int i, j;

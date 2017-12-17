@@ -12,6 +12,6 @@ void Towritenote()
 void Toview()
 {
     system("clear");
-    to_view_note(arr, tnum, &osnum, &pnum);
+    to_view_note(arr, tnum, &pnum);
 }
 
