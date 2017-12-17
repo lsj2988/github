@@ -109,7 +109,7 @@ void presenttime()
 
 }
 
-void to_write_note(info *arr, int *n_num, int *osnum, int *pnum)
+void to_write_note(info *arr, int *tnum, int *osnum)
 {
     
     char tmp[200];
