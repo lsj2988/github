@@ -4,15 +4,13 @@
 #include <string.h>
 #include <unistd.h>
 
-void Loaddata1(info *arr, int *pnum) 
+void Loaddata1(info *arr, int *pnum)//Load the data from a.txt for use 
 {
-    FILE *file = fopen("a.txt", "rb");
-
-    if(file == NULL)
+    FILE *file = fopen("a.txt","rb");
+    if (file == NULL) 
     {
         return;
     }
-    
     while(1) 
     {
         fread(arr[*pnum].name,sizeof(arr[*pnum].name),1,file);
@@ -29,20 +27,18 @@ void Loaddata1(info *arr, int *pnum)
             
         (*pnum)++;
     }
-
-    fclose(file);
 }
 
-void Savedata1(info *arr, int *pnum)
+void Savedata1(info *arr,int *pnum) //Save the user information in binary in a raw
 {
     int i;
     FILE *file = fopen("a.txt","wb");
-
-    if(file == NULL)
+    
+    if (file == NULL) 
     {
         return;
     }
-
+    
     for(i=0;i<(*pnum);i++) 
     {
         fwrite(arr[i].name,sizeof(arr[i].name),1,file);
@@ -52,28 +48,25 @@ void Savedata1(info *arr, int *pnum)
         fwrite(arr[i].city,sizeof(arr[i].city),1,file);
         fwrite(arr[i].age,sizeof(arr[i].age),1,file);
     }
-
     fclose(file);
 }
-
-char getch(void)
+char getch(void)//get the character.
 {
     char ch;
     char str[10];
-
-    fgets(str,3,stdin);
-    str[strlen(str) -1] = '\0';
+    
+    fgets(str, 3, stdin);
+    str[strlen(str) - 1] = '\0';
     fflush(stdin);
     ch = str[0];
-    
+
     return ch;
 }
-
 void Sign_up(info *arr , int *pnum) 
 {
-    if ((*pnum) < MAX_P) {
+    if ((*pnum) < MAX_P) //when the user number is under 10.
+    {
     
-    char ch;
     char id[20];
     char *psw;
     int j;
@@ -99,7 +92,7 @@ void Sign_up(info *arr , int *pnum)
                     t++;
                 }
             }
-            if(t ==(*pnum))
+            if(t ==(*pnum))//when the id is not overlapped quit the loop
                 break;
             else
                 printf("#The ID is already exist\n");
@@ -149,7 +142,6 @@ void Sign_in(info *arr, int *pnum,int *osnum)
     int i,j;
     char id[20];
     char *psw;
-    char ch;
     int pn;
     int flag;
 
@@ -159,7 +151,9 @@ void Sign_in(info *arr, int *pnum,int *osnum)
         flag = 0;
         printf("ID : ");
         fgets(id,sizeof(id),stdin);
-        id[strlen(id) -1] = '\0';
+        fflush(stdin);
+        id[strlen(id) - 1] = '\0';
+
         for(i = 0; i < (*pnum); i++) 
         {
             if(strncmp(arr[i].id,id,strlen(id)) == 0) 
@@ -168,26 +162,26 @@ void Sign_in(info *arr, int *pnum,int *osnum)
                 flag++;
                 break;
             }
+            
         }
         
         psw = getpass("PASSWORD : ");
 
-        if(strncmp(arr[pn].psw, psw, strlen(psw)) == 0) 
+        if(strncmp(arr[pn].psw, psw, strlen(psw)-1) == 0) 
         {
             (*osnum) = pn;
             flag++;
-            printf("---------------\n");
+            printf("---------------\n"); 
         }
-        else
+        else 
         {
-            system("clear");
             printf("Acess Denied\n");
-            
+            system("clear"); 
         }
     }
 }
 
-void List_of_user(info *arr, int *pnum) 
+void List_of_user(info *arr, int *pnum) //to show list of present users
 {
     
     int i;
